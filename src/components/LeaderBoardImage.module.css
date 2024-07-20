@@ -1,65 +1,109 @@
 .container {
-    position: relative;
-    display: inline-block;
-    margin: auto;
+  position: relative;
+  display: inline-block;
+  margin: auto;
+}
+
+.imageWrapper {
+  position: relative;
+  display: inline-block;
+  perspective: 1000px; 
+}
+
+.leaderBoardImg {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease, filter 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 2; 
+}
+
+.popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+}
+
+.sideArrow {
+  position: absolute;
+  top: 50%;
+  right: -40px; 
+  transform: translateY(-50%);
+  font-size: 24px;
+  color: #333;
+  pointer-events: none;
+}
+
+.bubble {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+  opacity: 0;
+  animation: bubble-animation 1.5s ease-in-out infinite;
+}
+
+.bubble:nth-child(1) {
+  top: 10%;
+  left: 10%;
+}
+
+.bubble:nth-child(2) {
+  top: 20%;
+  right: 10%;
+}
+
+.bubble:nth-child(3) {
+  bottom: 10%;
+  left: 50%;
+}
+
+@keyframes bubble-animation {
+  0% {
+    transform: scale(0);
+    opacity: 0;
   }
-  
-  .imageWrapper {
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
+  50% {
+    transform: scale(1);
+    opacity: 1;
   }
-  
-  .leaderBoardImg {
-    width: 100%;
-    height: auto;
-    transition: transform 0.3s ease;
-    
+  100% {
+    transform: scale(0);
+    opacity: 0;
   }
-  
-  .popup {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    pointer-events: none; 
+}
+
+
+.imageWrapper::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 700px; /* Adjust the size of the ellipse */
+  height: 700px; 
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  animation: ellipse-animation 4s ease-in-out infinite;
+  z-index: 0; /* Ensure the ellipses are behind the image and shadow */
+}
+
+@keyframes ellipse-animation {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
   }
-  
-  .sideArrow {
-    position: absolute;
-    top: 50%;
-    right: -40px; /* Position the arrow outside the image */
-    transform: translateY(-50%);
-    font-size: 24px;
-    color: #333;
-    pointer-events: none; /* Ensures the arrow doesn't block other interactions */
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
   }
-  
-  .bubble {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.3);
-    pointer-events: none; /* Ensures the bubbles don't block other interactions */
+  100% {
+    transform: translate(-50%, -50%) scale(1);
   }
-  
-  .bubble:nth-child(1) {
-    top: 10%;
-    left: 10%;
-  }
-  
-  .bubble:nth-child(2) {
-    top: 20%;
-    right: 10%;
-  }
-  
-  .bubble:nth-child(3) {
-    bottom: 10%;
-    left: 50%;
-  }
-  
+}
